@@ -5,3 +5,4 @@ lib/
 pip-selfcheck.json
 prophete/prophete/settings.py
 prophete/db.sqlite3
+prophete/static/*
