@@ -3,6 +3,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from core.forms import PredictionForm
 from core.models import Prediction
+from core.prophete import Prophete
 
 class HomeView(TemplateView):
   template_name = 'home.html'
@@ -30,6 +31,9 @@ class PredictionView(TemplateView):
   def get_context_data(self, **kwargs):
     prediction_pk = int(kwargs.get('prediction_pk', 0))
     prediction = get_object_or_404(Prediction, pk=prediction_pk)
+
+    prophete = Prophete(prediction)
+    prophete.predict(apply_log=True, periods=365)
 
     context = super(PredictionView, self).get_context_data(**kwargs)
     context['prediction'] = prediction
