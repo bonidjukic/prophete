@@ -6,25 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 
 
 def get_data_upload_to(instance, filename):
-  return 'data_uploads/{}/{}'.format(instance.data_uuid, filename)
+  return 'data_uploads/{}/{}'.format(instance.data_upload_uuid, filename)
 
 def import_document_validator(document):
   pass
-  # try:
-  #   #dialect = csv.Sniffer().sniff(document.read(1024))
-  #   #document.seek(0)
-  #   reader = csv.reader(document)
-  #   for r in reader:
-  #     print(r)
-  # except csv.Error:
-  #   print('error')
-  #   raise ValidationError('Not a valid csv file')
-
-  # reader = csv.reader(document.read().decode('utf-8').splitlines(), dialect)
-  # csv_headers = []
-
-  # for y_index, row in enumerate(reader):
-  #   print(row)
 
 class Prediction(models.Model):
 
@@ -40,7 +25,7 @@ class Prediction(models.Model):
 
   def save(self, *args, **kwargs):
     if self.pk is None:
-      self.data_uuid = uuid.uuid4().hex
+      self.data_upload_uuid = uuid.uuid4().hex
 
     super(Prediction, self).save(*args, **kwargs)
 
