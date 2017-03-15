@@ -3,14 +3,17 @@
 {% load i18n %}
 
 {% block content %}
-  <h1 class="cover-heading">Hello.</h1>
 
-  <form action="." method="post" enctype="multipart/form-data" class="form" id="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">
-      <i class="fa fa-check"></i>&nbsp;{% trans 'Submit' %}
-    </button>
-  </form>
+  <div class="row">
+    <div class="col-xs-12 offset-md-3 col-md-6">
+      <form action="." method="post" enctype="multipart/form-data" class="form" id="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">
+          <i class="fa fa-check"></i>&nbsp;{% trans 'Submit' %}
+        </button>
+      </form>
+    </div>
+  </div>
 
 {% endblock %}

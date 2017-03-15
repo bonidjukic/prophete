@@ -4,8 +4,10 @@
 
 {% block content %}
 
-  <h1 class="cover-heading">Hello.</h1>
-
-  {{ prediction }}
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <img src="{{ prediction.get_media_dir }}/plot_1.png" class="img img-responsive">
+    </div>
+  </div>
 
 {% endblock %}

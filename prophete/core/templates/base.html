@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Prophète</title>
+    <title>{% trans 'Prophète' %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -20,41 +20,45 @@
 
   <body>
 
-    <div class="site-wrapper">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+      <button class="navbar-toggler navbar-toggler-right" type="button"
+              data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'home' %}">{% trans 'Prophète' %}</a>
 
-      <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">Prophète</h3>
-              <nav class="nav nav-masthead">
-                <a class="nav-link active" href="{% url 'home' %}">{% trans 'Home' %}</a>
-              </nav>
-            </div>
-          </div>
-
-          <div class="inner cover">{% block content %}{% endblock %}</div>
-
-          <div class="mastfoot">
-            <div class="inner">
-              <p>{% trans 'Prophète project, by' %} <a href="https://github.com/bonidjukic" target="_blank">bonidjukic</a>.</p>
-            </div>
-          </div>
-
-        </div>
-
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">
+              {% trans 'Home' %} <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
       </div>
+    </nav>
 
-    </div>
+    <div class="container" id="main-contenter">{% block content %}{% endblock %}</div>
+
+    <footer class="footer">
+      <nav class="navbar fixed-bottom navbar-light bg-faded text-center">
+        <p class="text-muted">
+          {% trans 'Prophète project, by' %} <a href="https://github.com/bonidjukic" target="_blank">bonidjukic</a>.
+        </p>
+      </nav>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"><\/script>')</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
   </body>
 </html>
