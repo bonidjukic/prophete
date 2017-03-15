@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 
 {% block content %}
   <h1 class="cover-heading">Hello.</h1>
+
+  <form action="." method="post" enctype="multipart/form-data" class="form" id="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">
+      <i class="fa fa-check"></i>&nbsp;{% trans 'Submit' %}
+    </button>
+  </form>
+
 {% endblock %}
