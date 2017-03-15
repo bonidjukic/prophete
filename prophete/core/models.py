@@ -1,12 +1,18 @@
-import uuid, csv
+import uuid, os
 
 from django.db import models
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 
-def get_data_upload_to(instance, filename):
-  return 'data_uploads/{}/{}'.format(instance.data_upload_uuid, filename)
+def get_data_upload_to(instance, filename=None):
+  path = 'data_uploads/{}'.format(instance.data_upload_uuid)
+
+  if filename is not None:
+    path += '/{}'.format(filename)
+
+  return path
 
 def import_document_validator(document):
   pass
@@ -22,6 +28,12 @@ class Prediction(models.Model):
 
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
+
+  def get_media_dir(self, absolute_path=False):
+    return os.path.join(
+      settings.MEDIA_ROOT if absolute_path else settings.MEDIA_URL,
+      get_data_upload_to(self)
+    )
 
   def save(self, *args, **kwargs):
     if self.pk is None:
