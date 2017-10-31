@@ -4,16 +4,38 @@
 
 {% block content %}
 
+<div class="container">
   <div class="row">
     <div class="col-xs-12 offset-md-3 col-md-6">
       <form action="." method="post" enctype="multipart/form-data" class="form" id="">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        <div class="form-group">
+          <label class="custom-file">
+            <input type="file" id="{{ form.data_upload.id_for_label }}" name="{{ form.data_upload.name }}" class="custom-file-input">
+            <span class="custom-file-control" data-content="Choose file..."></span>
+          </label>
+        </div>
+
         <button type="submit" class="btn btn-success">
           <i class="fa fa-check"></i>&nbsp;{% trans 'Submit' %}
         </button>
+
       </form>
     </div>
   </div>
+</div>
 
 {% endblock %}
+
+{% block extra_js %}
+
+<script type="text/javascript" src="{% static 'core/js/home.js' %}"></script>
+<script type="text/javascript">
+  $(function() {
+    home_module = Object.create(home_module_handler);
+    home_module.init({});
+  });
+</script>
+
+{% endblock extra_js %}

@@ -4,10 +4,97 @@
 
 {% block content %}
 
-  <div class="row">
-    <div class="col-xs-12 text-center">
-      <img src="{{ prediction.get_media_dir }}/plot_1.png" class="img img-responsive">
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-12">
+      <form class="form" id="config-form">
+        <div class="row">
+          <div class="col-12 col-md-3">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="apply_log">
+                {% trans 'Apply log to values column' %}
+              </label>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="form-group">
+              <label for="prediction-period">{% trans 'Prediction period (days)' %}</label>
+              <input type="number" name="periods" class="form-control" id="prediction-period"
+                     placeholder="" autocomplete="off" value="365">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-right">
+            <button type="submit" id="calculate-forecast" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+      <hr class="mt-4">
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs mb-5" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#table" role="tab">
+            {% trans 'Forecast Table' %}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#graph" role="tab">
+            {% trans 'Forecast Graph' %}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#trend" role="tab">
+            {% trans 'Forecast Trend Graph' %}
+          </a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="table" role="tabpanel">
+
+        </div>
+
+        <div class="tab-pane" id="graph" role="tabpanel">
+          <div class="row">
+            <div class="col-12 text-center">
+              <img src="{{ prediction.get_media_dir }}/plot_1.png" class="img img-responsive">
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="trend" role="tabpanel">
+          <div class="row">
+            <div class="col-12 text-center">
+              <img src="{{ prediction.get_media_dir }}/plot_2.png" class="img img-responsive">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
+
+
+{% block extra_js %}
+
+<script type="text/javascript" src="{% static 'core/js/forecast.js' %}"></script>
+<script type="text/javascript">
+  $(function() {
+    forecast_module = Object.create(forecast_module_handler);
+    forecast_module.init({
+      submit_url: '{% url "calculate_forecast" prediction.pk %}',
+    });
+  });
+</script>
+
+{% endblock extra_js %}

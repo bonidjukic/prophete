@@ -19,3 +19,13 @@ body {
 #main-container {
   margin-top: 80px;
 }
+
+.custom-file-control {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: .5rem 6rem .5rem 1rem;
+}
+.custom-file-control:after {
+  content: attr(data-content) !important;
+}
